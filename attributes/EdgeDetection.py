@@ -104,6 +104,7 @@ class EdgeDetection():
         
         # Function to extract patches and perform algorithm
         def operation(chunk, kernel):
+            np.seterr(all='ignore')
             x = util.extract_patches(chunk, kernel)
             square_of_sums = np.sum(x, axis=(-3,-2)) ** 2
             sum_of_squares = np.sum(x ** 2, axis=(-3,-2))
@@ -225,11 +226,10 @@ class EdgeDetection():
         
         # Function to extract patches and perform algorithm 
         def operation(chunk, kernel):
-            
+            np.seterr(all='ignore')
             ki, kj, kk = kernel
             patches = util.extract_patches(chunk, kernel)
             
-            # Iterate through the patches and apply the semblance algorithm
             out_data = []
             for i in range(0, patches.shape[0]):
                 region = patches[i]
@@ -356,6 +356,8 @@ class EdgeDetection():
                                                       KMNeg : Most Negative Curvature}
         """
         
+        np.seterr(all='ignore')
+        
         # Generate Dask Array as necessary
         darray_il, chunks_init = self.create_array(darray_il, kernel, preview=preview)
         darray_xl, chunks_init = self.create_array(darray_xl, kernel, preview=preview)
@@ -424,8 +426,3 @@ class EdgeDetection():
         KMNeg = da.minimum(Kmax, Kmin)
         
         return(H, K, Kmax, Kmin, KMPos, KMNeg)
-
-    
-    def run(self, darray, out_file, name):
-        
-        darray.to_hdf5(out_file, name)

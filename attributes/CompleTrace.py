@@ -628,10 +628,3 @@ class ComplexAttributes():
         result[da.isnan(result)] = 0
         
         return(result)
-    
-    
-    def run(self, darray, out_file, name):
-        
-        darray.to_hdf5(out_file, name)
-        
-        

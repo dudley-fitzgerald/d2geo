@@ -68,7 +68,7 @@ def compute_chunk_size(shape, byte_size, kernel=None, preview=None):
     
     # Compute chunk size if preview mode is disabled
     if preview == None:
-        M *= 0.3
+#        M *= 0.3
         Mij = kki * kkj.reshape(-1,1) * shape[2]
         Mij[Mij > M] = -1
         Mij = Mij.diagonal()
@@ -168,7 +168,7 @@ def available_volumes(file_path):
     
 
 
-def read(file_path, name):
+def read(file_path):
     """
     Description
     -----------
@@ -177,20 +177,19 @@ def read(file_path, name):
     Parameters
     ----------
     file_path : str, path to file
-    name : str, name of dataset
        
     Returns
     -------
     data : HDF5 dataset, pointer to data on disk
     """
     
-    data = h5py.File(file_path)[name]
+    data = h5py.File(file_path)['data']
     
     return(data)
     
     
 
-def save(out_data, out_file, name):
+def save(out_data, out_file):
     """
     Description
     -----------
@@ -200,17 +199,11 @@ def save(out_data, out_file, name):
     ----------
     out_data : Dask Array, data to be saved to disk
     out_file : str, path to file to save to
-    name : str, name of dataset
     """
-    
-    # Assess if specified name exists already
-    with h5py.File(out_file, 'r') as f:   
-        if name in f:            
-            raise Exception('Name already exists, try new name')
     
     # Save to disk if object is Dask Array
     try:       
-        out_data.to_hdf5(out_data, name)
+        out_data.to_hdf5(out_file, 'data')
     except Exception:
         raise Exception('Object is not a Dask Array')
         

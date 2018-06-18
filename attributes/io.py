@@ -42,10 +42,9 @@ def segy_read(segy_path, out_path, out_name):
     max_xline = trace_xlines_unique.max()
     max_zsample = segy_file.samples.max()
     
-    inc_inline = (max_inline - min_inline) / num_inline
-    inc_xline = (max_xline - min_xline) / num_xline
-    inc_zsample = segy_file.bin[segyio.BinField.Interval] / 1000
-    
+    inc_inline = int((max_inline - min_inline) / num_inline)
+    inc_xline = int((max_xline - min_xline) / num_xline)
+    inc_zsample = segy_file.bin[segyio.BinField.Interval] / 1000    
     
     shape = (trace_inlines_unique.size, trace_xlines_unique.size, num_zsamples)
     ti_idx = trace_inlines - trace_inlines.min()
