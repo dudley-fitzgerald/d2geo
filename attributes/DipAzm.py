@@ -209,16 +209,16 @@ class DipAzm():
             
             shape = gi2.shape
             
-            T = np.array([[gi2, gigj, gigk],
+            gst = np.array([[gi2, gigj, gigk],
                           [gigj, gj2, gjgk],
                           [gigk, gjgk, gk2]])
             
-            T = np.moveaxis(T, [0,1], [-2,-1])
-            T = T.reshape((-1, 3, 3))
+            gst = np.moveaxis(gst, [0,1], [-2,-1])
+            gst = gst.reshape((-1, 3, 3))
             
-            evals, evecs = np.linalg.eigh(T)
+            evals, evecs = np.linalg.eigh(gst)
             ndx = evals.argsort()
-            evecs = evecs[np.arange(0,T.shape[0],1),:,ndx[:,2]]
+            evecs = evecs[np.arange(0,gst.shape[0],1),:,ndx[:,2]]
             
             out = -evecs[:, axis] / evecs[:, 2]
             out = out.reshape(shape)
@@ -271,16 +271,16 @@ class DipAzm():
             
             shape = gi2.shape
             
-            T = np.array([[gi2, gigj, gigk],
+            gst = np.array([[gi2, gigj, gigk],
                           [gigj, gj2, gjgk],
                           [gigk, gjgk, gk2]])
             
-            T = np.moveaxis(T, [0,1], [-2,-1])
-            T = T.reshape((-1, 3, 3))
+            gst = np.moveaxis(gst, [0,1], [-2,-1])
+            gst = gst.reshape((-1, 3, 3))
             
-            evals, evecs = np.linalg.eigh(T)
+            evals, evecs = np.linalg.eigh(gst)
             ndx = evals.argsort()
-            evecs = evecs[np.arange(0,T.shape[0],1),:,ndx[:,2]]
+            evecs = evecs[np.arange(0,gst.shape[0],1),:,ndx[:,2]]
             
             norm_factor = np.linalg.norm(evecs, axis = -1)
             evecs[:, 0] /= norm_factor
@@ -337,16 +337,16 @@ class DipAzm():
             
             shape = gi2.shape
             
-            T = np.array([[gi2, gigj, gigk],
+            gst = np.array([[gi2, gigj, gigk],
                           [gigj, gj2, gjgk],
                           [gigk, gjgk, gk2]])
             
-            T = np.moveaxis(T, [0,1], [-2,-1])
-            T = T.reshape((-1, 3, 3))
+            gst = np.moveaxis(gst, [0,1], [-2,-1])
+            gst = gst.reshape((-1, 3, 3))
             
-            evals, evecs = np.linalg.eigh(T)
+            evals, evecs = np.linalg.eigh(gst)
             ndx = evals.argsort()
-            evecs = evecs[np.arange(0,T.shape[0],1),:,ndx[:,2]]
+            evecs = evecs[np.arange(0,gst.shape[0],1),:,ndx[:,2]]
             
             norm_factor = np.linalg.norm(evecs, axis = -1)
             evecs[:, 0] /= norm_factor

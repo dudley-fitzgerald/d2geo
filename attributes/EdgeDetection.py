@@ -106,9 +106,9 @@ class EdgeDetection():
         def operation(chunk, kernel):
             np.seterr(all='ignore')
             x = util.extract_patches(chunk, kernel)
-            square_of_sums = np.sum(x, axis=(-3,-2)) ** 2
-            sum_of_squares = np.sum(x ** 2, axis=(-3,-2))
-            sembl = square_of_sums.sum(axis = -1) / sum_of_squares.sum(axis = -1)
+            s1 = np.sum(x, axis=(-3,-2)) ** 2
+            s2 = np.sum(x ** 2, axis=(-3,-2))
+            sembl = s1.sum(axis = -1) / s2.sum(axis = -1)
             sembl /= kernel[0] * kernel[1]
 
             return(sembl)
@@ -151,14 +151,14 @@ class EdgeDetection():
             
             chunk_shape = gi2.shape
             
-            T = np.array([[gi2, gigj, gigk],
+            gst = np.array([[gi2, gigj, gigk],
                           [gigj, gj2, gjgk],
                           [gigk, gjgk, gk2]])
             
-            T = np.moveaxis(T, [0,1], [-2,-1])
-            T = T.reshape((-1, 3, 3))
+            gst = np.moveaxis(gst, [0,1], [-2,-1])
+            gst = gst.reshape((-1, 3, 3))
             
-            eigs = np.sort(np.linalg.eigvalsh(T))
+            eigs = np.sorgst(np.linalg.eigvalsh(gst))
             e1 = eigs[:, 2].reshape(chunk_shape)
             e2 = eigs[:, 1].reshape(chunk_shape)
             e3 = eigs[:, 0].reshape(chunk_shape)
@@ -219,7 +219,7 @@ class EdgeDetection():
         """
         
         # Function to compute the COV
-        def dot_axis(x, ki, kj, kk):
+        def cov(x, ki, kj, kk):
             x = x.reshape((ki * kj, kk))
             x = np.hstack([x.real, x.imag])
             return(x.dot(x.T))
@@ -232,9 +232,9 @@ class EdgeDetection():
             
             out_data = []
             for i in range(0, patches.shape[0]):
-                region = patches[i]
-                region = region.reshape(-1, ki * kj * kk)
-                cov = np.apply_along_axis(dot_axis, 1, region, ki, kj, kk)
+                traces = patches[i]
+                traces = traces.reshape(-1, ki * kj * kk)
+                cov = np.apply_along_axis(cov, 1, traces, ki, kj, kk)
                 vals = np.linalg.eigvals(cov)
                 vals = np.abs(vals.max(axis=1) / vals.sum(axis=1))
             
@@ -283,14 +283,14 @@ class EdgeDetection():
             
             chunk_shape = gi2.shape
             
-            T = np.array([[gi2, gigj, gigk],
+            gst = np.array([[gi2, gigj, gigk],
                           [gigj, gj2, gjgk],
                           [gigk, gjgk, gk2]])
             
-            T = np.moveaxis(T, [0,1], [-2,-1])
-            T = T.reshape((-1, 3, 3))
+            gst = np.moveaxis(gst, [0,1], [-2,-1])
+            gst = gst.reshape((-1, 3, 3))
             
-            eigs = np.sort(np.linalg.eigvalsh(T))
+            eigs = np.sort(np.linalg.eigvalsh(gst))
             e1 = eigs[:, 2].reshape(chunk_shape)
             e2 = eigs[:, 1].reshape(chunk_shape)
             e3 = eigs[:, 0].reshape(chunk_shape)
