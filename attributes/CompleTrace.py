@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May 29 11:06:21 2018
+Complex Trace Attributes for Seismic Data
 
-@author: Dudxz
+@author: Braden Fitz-Gerald
+@email: braden.fitzgerald@gmail.com
+
 """
 
+# Import Libraries
 import dask.array as da
 import numpy as np
 import util

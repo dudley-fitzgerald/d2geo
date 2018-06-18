@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 17 08:09:54 2018
+Utilities for reading seismic data from SEGY and converting to usable format.
 
-@author: Dudxz
+@author: Braden Fitz-Gerald
+@email: braden.fitzgerald@gmail.com
+
 """
 
+# Import Libraries
 import dask.array as da
 import numpy as np
 import segyio

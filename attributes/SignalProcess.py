@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jun  1 08:14:21 2018
+Various signal processing attributes for Seismic Data
 
-@author: Dudxz
+@author: Braden Fitz-Gerald
+@email: braden.fitzgerald@gmail.com
+
 """
 
+# Import Libraries
 import dask.array as da
 import numpy as np
 from scipy import ndimage as ndi

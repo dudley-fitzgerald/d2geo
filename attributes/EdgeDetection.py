@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 19 14:11:22 2018
+Edge Detection Attributes for Seismic Data
 
-@author: Dudxz
+@author: Braden Fitz-Gerald
+@email: braden.fitzgerald@gmail.com
+
 """
+
+# Import Libraries
 
 import dask.array as da
 import numpy as np

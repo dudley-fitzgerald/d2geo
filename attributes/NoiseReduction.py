@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 30 16:31:32 2018
+Noise Reduction attributes for Seismic Data
 
-@author: Dudxz
+@author: Braden Fitz-Gerald
+@email: braden.fitzgerald@gmail.com
+
 """
 
+# Import Libraries
 import dask.array as da
 import numpy as np
 from scipy import ndimage as ndi

@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun 14 09:54:12 2018
+Frequency attributes for Seismic data
 
-@author: Dudxz
+@author: Braden Fitz-Gerald
+@email: braden.fitzgerald@gmail.com
+
 """
 
+# Import Libraries
 import dask.array as da
 import numpy as np
 from scipy import signal

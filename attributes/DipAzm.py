@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun  6 11:02:36 2018
+Dip & Azimuth Calculations for Seismic Data
 
-@author: Dudxz
+@author: Braden Fitz-Gerald
+@email: braden.fitzgerald@gmail.com
+
 """
 
+# Import Libraries
 import numpy as np
 import dask.array as da
 from scipy import ndimage as ndi
