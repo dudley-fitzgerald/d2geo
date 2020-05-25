@@ -331,7 +331,7 @@ def hilbert(in_data):
     
     N = in_data.shape[-1]
     
-    Xf = np.fft.fftpack.fft(in_data, n=N, axis=-1)
+    Xf = np.fft.fft(in_data, n=N, axis=-1)
     
     h = np.zeros(N)
     if N % 2 == 0:
@@ -345,5 +345,5 @@ def hilbert(in_data):
         ind = [np.newaxis] * in_data.ndim
         ind[-1] = slice(None)
         h = h[ind]
-    x = np.fft.fftpack.ifft(Xf * h, axis=-1)
+    x = np.fft.ifft(Xf * h, axis=-1)
     return x
