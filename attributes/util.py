@@ -141,7 +141,7 @@ def trim_dask_array(in_data, kernel):
     hw = tuple(np.array(kernel) // 2)    
     axes = {0 : hw[0], 1 : hw[1], 2: hw[2]}
     
-    return(da.ghost.trim_internal(in_data, axes=axes))
+    return(da.overlap.trim_internal(in_data, axes=axes))
     
     
 
