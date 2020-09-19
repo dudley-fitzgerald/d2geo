@@ -13,6 +13,9 @@ import numpy as np
 import h5py
 import psutil
 
+# Ignore warning
+import warnings
+warnings.filterwarnings("ignore")
 
 def compute_chunk_size(shape, byte_size, kernel=None, preview=None):
     """
