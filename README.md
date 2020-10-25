@@ -1,8 +1,6 @@
 # d2geo
 Framework for computing seismic attributes with Python
 
-**Updates:**
+## Implementation
 
-* Change `da.ghost.ghost` to `da.overlap.overlap`, since `ghost` has been deprecated in renamed to `overlap`
-* Change `np.fft.fftpack.fft` and `np.fft.fftpack.ifft` to `np.fft.fft` and `np.fft.ifft`
-* Implemented on Dutch F3
+Several seismic attributes have been calculated from post-stack seismic volume of Dutch F3 as an example. 
