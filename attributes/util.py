@@ -13,6 +13,9 @@ import numpy as np
 import h5py
 import psutil
 
+# Ignore warning
+import warnings
+warnings.filterwarnings("ignore")
 
 def compute_chunk_size(shape, byte_size, kernel=None, preview=None):
     """
@@ -141,7 +144,7 @@ def trim_dask_array(in_data, kernel):
     hw = tuple(np.array(kernel) // 2)    
     axes = {0 : hw[0], 1 : hw[1], 2: hw[2]}
     
-    return(da.ghost.trim_internal(in_data, axes=axes))
+    return(da.overlap.trim_internal(in_data, axes=axes))
     
     
 
@@ -331,7 +334,7 @@ def hilbert(in_data):
     
     N = in_data.shape[-1]
     
-    Xf = np.fft.fftpack.fft(in_data, n=N, axis=-1)
+    Xf = np.fft.fft(in_data, n=N, axis=-1)
     
     h = np.zeros(N)
     if N % 2 == 0:
@@ -342,8 +345,7 @@ def hilbert(in_data):
         h[1:(N + 1) // 2] = 2
 
     if in_data.ndim > 1:
-        ind = [np.newaxis] * in_data.ndim
-        ind[-1] = slice(None)
+        ind = slice(None)
         h = h[ind]
-    x = np.fft.fftpack.ifft(Xf * h, axis=-1)
+    x = np.fft.ifft(Xf * h, axis=-1)
     return x
